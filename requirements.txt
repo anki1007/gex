@@ -2,4 +2,5 @@ Bharat-sm-data
 beautifulsoup4
 pandas
 plotly
-streamlit
+streamlit>=1.31.0
+altair<5.0.0
