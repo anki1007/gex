@@ -65,9 +65,19 @@ def calculate_gex(df, spot_price, expiry_date_str, risk_free_rate=0.07):
         call_iv = call_data['iv'].mean() / 100 if not call_data.empty and call_data['iv'].mean() > 0 else 0.15
         put_iv = put_data['iv'].mean() / 100 if not put_data.empty and put_data['iv'].mean() > 0 else 0.15
         
-        # Calculate gamma
-        call_gamma = calculate_gamma(spot_price, strike, T, risk_free_rate, call_iv, 'call')
-        put_gamma = calculate_gamma(spot_price, strike, T, risk_free_rate, put_iv, 'put')
+        # --- SENSIBULL NATIVE GREEKS INTEGRATION ---
+        # Check if we have Sensibull's native gamma for CALLS, otherwise calculate it
+        if 'native_gamma' in call_data.columns and not call_data.empty and pd.notna(call_data['native_gamma'].iloc[0]):
+            call_gamma = call_data['native_gamma'].iloc[0]
+        else:
+            call_gamma = calculate_gamma(spot_price, strike, T, risk_free_rate, call_iv, 'call')
+            
+        # Check if we have Sensibull's native gamma for PUTS, otherwise calculate it
+        if 'native_gamma' in put_data.columns and not put_data.empty and pd.notna(put_data['native_gamma'].iloc[0]):
+            put_gamma = put_data['native_gamma'].iloc[0]
+        else:
+            put_gamma = calculate_gamma(spot_price, strike, T, risk_free_rate, put_iv, 'put')
+        # ---------------------------------------------
         
         # GEX = Gamma * OI * Spot^2 * 0.01
         # Calls are negative GEX (dealers are short), Puts are positive GEX (dealers are long)
