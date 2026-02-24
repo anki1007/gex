@@ -7,7 +7,8 @@ from .data_fetcher import (
     generate_sample_data, 
     get_live_spot_price,
     get_index_quote,
-    get_market_status
+    get_market_status,
+    get_available_expiries  # <--- Moved here
 )
 from .gex_calculator import calculate_gex, calculate_dex, find_gamma_levels
 from .visualizations import (
@@ -22,7 +23,7 @@ from .utils import (
     get_atm_strike, 
     format_number,
     filter_strikes,
-    get_available_expiries
+    calculate_time_to_expiry # <--- Added this as it's used in your calc module
 )
 
 __all__ = [
@@ -31,6 +32,7 @@ __all__ = [
     'get_live_spot_price',
     'get_index_quote',
     'get_market_status',
+    'get_available_expiries',
     'calculate_gex',
     'calculate_dex',
     'find_gamma_levels',
@@ -43,5 +45,5 @@ __all__ = [
     'get_atm_strike',
     'format_number',
     'filter_strikes',
-    'get_available_expiries'
+    'calculate_time_to_expiry'
 ]
