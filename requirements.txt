@@ -5,3 +5,4 @@ plotly>=5.17.0
 requests>=2.31.0
 scipy>=1.11.0
 nselib>=2.4.2
+pip install Bharat-sm-data bs4 pandas plotly streamlit
