@@ -1,8 +1,5 @@
-requests
-scipy
-nselib
-Bharat-sm-data 
-bs4 
-pandas 
-plotly 
+Bharat-sm-data
+beautifulsoup4
+pandas
+plotly
 streamlit
